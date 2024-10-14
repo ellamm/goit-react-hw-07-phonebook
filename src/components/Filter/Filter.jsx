@@ -1,19 +1,10 @@
-import React from 'react';
-import {
-  FilterWrapper,
-  FilterInput,
-  FilterLabel,
-} from 'components/Filter/Filter.styled';
-
-import { nanoid } from '@reduxjs/toolkit';
+import { FilterWrapper, FilterLabel, FilterInput } from './Filter.styled';
 import { useSelector, useDispatch } from 'react-redux';
-import { getFilter } from 'redux/selectors';
+import { selectFilter } from 'redux/selectors';
 import { changeFilter } from 'redux/filterSlice';
 
-const filterInputId = nanoid();
-
 const Filter = () => {
-  const value = useSelector(getFilter);
+  const value = useSelector(selectFilter);
   const dispatch = useDispatch();
 
   const onChange = event => {
@@ -24,13 +15,10 @@ const Filter = () => {
 
   return (
     <FilterWrapper>
-      <FilterLabel>Find contacts by name</FilterLabel>
-        <FilterInput
-          type="text"
-          value={value}
-          onChange={onChange}
-          id={filterInputId}
-        />
+      <FilterLabel>
+        Find contacts by name
+        <FilterInput type="text" value={value} onChange={onChange} />
+      </FilterLabel>
     </FilterWrapper>
   );
 };
